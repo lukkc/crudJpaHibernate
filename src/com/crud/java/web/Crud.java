@@ -22,6 +22,9 @@ public class Crud {
 			System.out.println("6 - ATIVAR");
 			System.out.println("7 - DESATIVAR");
 			System.out.println("8 - LISTAR PREFERENCIAS");
+			System.out.println("9 - PROCURAR POR ID - LAZY");
+			System.out.println("10 - PROCURAR POR ID - EAGER");
+			System.out.println("11 - REFRESH ");
 			
 			int input = reader.nextInt();
 			
@@ -57,15 +60,27 @@ public class Crud {
 			case 8:
 				clienteService.listarPreferencias();
 				break;
+				
+			case 9:
+				clienteService.findByIdLazy();
+				break;
+					
+			case 10:
+				clienteService.findByIdEager();
+				break;
+					
+			case 11:
+				clienteService.refresh();
+				break;
 
 			default:
 				break;
 			}
 			
 
-		System.out.println("DESEJA FAZER MAIS ALGUMA OPERA«√O?");
+		System.out.println("DESEJA FAZER MAIS ALGUMA OPERA√á√ÉO?");
 		System.out.println("0 - sim");
-		System.out.println("1 - n„o");
+		System.out.println("1 - n√£o");
 			
 		} while (reader.nextInt() == 0);
 		
