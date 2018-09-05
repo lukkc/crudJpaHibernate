@@ -61,6 +61,42 @@ public class ClienteRepository extends EntityInstance{
 		return null;
 	}
 	
+	public Cliente findByIdLazy(Long id) {
+		
+		try {
+			
+			EntityInstance entity = this.getEntityInstance();
+			entity.manager.getTransaction().begin();
+			Cliente cliente = (Cliente) entity.manager.getReference(Cliente.class, id);		
+			entity.manager.getTransaction().commit();
+			entity.close();
+			return cliente;
+			
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		
+		return null;
+	}
+	
+	public Cliente findByIdEager(Long id) {
+		
+		try {
+			
+			EntityInstance entity = this.getEntityInstance();
+			entity.manager.getTransaction().begin();
+			Cliente cliente = (Cliente) entity.manager.find(Cliente.class, id);		
+			entity.manager.getTransaction().commit();
+			entity.close();
+			return cliente;
+			
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		
+		return null;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Cliente> findAll() {
 		
@@ -142,6 +178,26 @@ public class ClienteRepository extends EntityInstance{
 		} catch (Exception e) {
 			System.err.println(e);
 		}
+	}
+	
+	public Cliente refresh(Long id) {
+		
+		try {
+			
+			EntityInstance entity = this.getEntityInstance();
+			entity.manager.getTransaction().begin();
+			Cliente cliente = (Cliente) entity.manager.find(Cliente.class, id);		
+			entity.manager.getTransaction().commit();
+			entity.manager.refresh(cliente);
+			entity.manager.detach(cliente);
+			entity.close();
+			return cliente;
+			
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		
+		return null;
 	}
 
 
