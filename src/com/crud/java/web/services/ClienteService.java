@@ -18,7 +18,7 @@ public class ClienteService {
 			Cliente cliente = new Cliente();
 			List<Preferencia> preferencias = new ArrayList<Preferencia>();
 			
-			System.out.println("\nINFORMA«’ES USUARIO\n");
+			System.out.println("\nINFORMA√á√ïES USUARIO\n");
 			
 			System.out.println("Nome: ");
 			cliente.setNome(reader.next());
@@ -33,19 +33,19 @@ public class ClienteService {
 			
 			System.out.println("Quer adicionar preferencias?\n");
 			System.out.println("0 - sim");
-			System.out.println("1 - n„o");
+			System.out.println("1 - n√£o");
 			
 			if(reader.nextInt() == 0) {
 				do {
 					Preferencia preferencia = new Preferencia();
 					preferencia.setCliente(cliente);
-					System.out.println("\nDescriÁ„o: ");
+					System.out.println("\nDescri√ß√£o: ");
 					preferencia.setDescricao(reader.next());
 					preferencias.add(preferencia);
 					
 					System.out.println("\n Quer adicionar mais um?");
 					System.out.println("0 - sim");
-					System.out.println("1 - n„o");
+					System.out.println("1 - n√£o");
 					
 				}while(reader.nextInt() == 0);
 				
@@ -64,7 +64,7 @@ public class ClienteService {
 			
 			Cliente cliente = clienteRepository.findByMatricula(reader.next());
 			
-			System.out.println("\nINFORMA«’ES USUARIO\n");
+			System.out.println("\nINFORMA√á√ïES USUARIO\n");
 			
 			System.out.println("Nome: ");
 			cliente.setNome(reader.next());
@@ -77,19 +77,19 @@ public class ClienteService {
 			
 			System.out.println("Quer adicionar preferencias?\n");
 			System.out.println("0 - sim");
-			System.out.println("1 - n„o");
+			System.out.println("1 - n√£o");
 			
 			if(reader.nextInt() == 0) {
 				do {
 					Preferencia preferencia = new Preferencia();
 					preferencia.setCliente(cliente);
-					System.out.println("\nDescriÁ„o: ");
+					System.out.println("\nDescri√ß√£o: ");
 					preferencia.setDescricao(reader.next());
 					preferencias.add(preferencia);
 					
 					System.out.println("\n Quer adicionar mais um?");
 					System.out.println("0 - sim");
-					System.out.println("1 - n„o");
+					System.out.println("1 - n√£o");
 					
 				}while(reader.nextInt() == 0);
 				
@@ -109,6 +109,26 @@ public class ClienteService {
 			
 			System.err.println("INFORME A MATRICULA DO CLIENTE QUE DESEJA PROCURAR: ");
 			Cliente cliente = clienteRepository.findByMatricula(reader.next());
+			
+			System.out.println(cliente.toString());
+			reader.close();
+		}
+	
+		public void findByIdLazy() {
+			Scanner reader = new Scanner(System.in);
+			
+			System.err.println("INFORME O ID DO CLIENTE QUE DESEJA PROCURAR: ");
+			Cliente cliente = clienteRepository.findByIdLazy(new Long(reader.nextInt()));
+			
+			System.out.println(cliente.toString());
+			reader.close();
+		}
+	
+		public void findByIdEager() {
+			Scanner reader = new Scanner(System.in);
+			
+			System.err.println("INFORME O ID DO CLIENTE QUE DESEJA PROCURAR: ");
+			Cliente cliente = clienteRepository.findByIdEager(new Long(reader.nextInt()));
 			
 			System.out.println(cliente.toString());
 			reader.close();
@@ -164,6 +184,16 @@ public class ClienteService {
 			}
 			System.out.println("]");
 			
+			reader.close();
+		}
+	
+		public void refresh() {
+			Scanner reader = new Scanner(System.in);
+			
+			System.err.println("INFORME O ID DO CLIENTE QUE DESEJA PROCURAR: ");
+			Cliente cliente = clienteRepository.refresh(new Long(reader.nextInt()));
+			
+			System.out.println(cliente.toString());
 			reader.close();
 		}
 }
